@@ -10,7 +10,19 @@ interface ShareScoreboardDialogProps {
 }
 
 const generateShareLink = (name: string, ratings: EloRatings): string => {
-    const base64Payload = btoa(JSON.stringify({ name, ratings }));
+    const sanitizedName = name.replace(/[^a-zA-Z0-9 ]/g, '');
+
+    const sanitizedRatings: EloRatings = {}
+    Object.entries(ratings).map(([key, value]) => {
+        const newPayload = {
+            numberOfVotes: value.numberOfVotes || 0,
+            elo: Math.round((value.elo || 0) * 100) / 100,
+        }
+
+        sanitizedRatings[key] = newPayload;
+    });
+
+    const base64Payload = btoa(JSON.stringify({ name: sanitizedName, ratings: sanitizedRatings }));
 
     const baseUrl = window.location.origin;
 
