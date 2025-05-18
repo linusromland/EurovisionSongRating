@@ -16,9 +16,17 @@ export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatin
     const [showAll, setShowAll] = useState(false);
 
     const sortedSongsFull = useMemo(() => {
-        return [...songs]
-            .map(song => ({ ...song, elo: eloRatings[song.id] || INITIAL_ELO }))
-            .sort((a, b) => (b.elo ?? INITIAL_ELO) - (a.elo ?? INITIAL_ELO));
+
+        return Object.entries(eloRatings)
+            .map(([songId, elo]) => {
+                const song = songs.find(s => s.id === songId);
+                if (!song || elo === INITIAL_ELO) return null;
+                return {
+                    ...song,
+                    elo: elo
+                };
+            }
+            ).filter(Boolean).sort((a, b) => (b?.elo ?? INITIAL_ELO) - (a?.elo ?? INITIAL_ELO)) as Song[]
     }, [songs, eloRatings]);
 
     const songsToDisplay = useMemo(() => {

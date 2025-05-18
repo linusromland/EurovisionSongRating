@@ -5,6 +5,7 @@
 ### Added
 
 - Added a new feature to allow users to create shareble links to show their scoreboard.
+- Only shows countries that has been voted for in the scoreboard.
 
 ### Fixed
 
