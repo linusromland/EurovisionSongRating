@@ -1,0 +1,94 @@
+.songCard {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.songCard:hover {
+    transform: translateY(-5px);
+}
+
+.songCardContent {
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.songCard h2 {
+    color: var(--accent-color-1);
+    font-size: 1.8em;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5em;
+}
+
+.countryFlag {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.songTitle {
+    font-size: 1.4em;
+    color: var(--accent-color-2);
+    font-style: italic;
+    min-height: 1.5em;
+}
+
+.artistName {
+    font-size: 1.1em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    min-height: 1.2em;
+}
+
+.youtubeEmbed {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+
+.embedError {
+    color: var(--accent-color-1);
+    margin: 20px 0;
+}
+
+.voteButton {
+    background-color: var(--accent-color-2);
+    color: var(--primary-bg);
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+
+.voteButton:hover {
+    background-color: var(--gold-accent);
+    color: var(--primary-bg);
+    transform: scale(1.05);
+}
+
+.voteButtonSongA {
+    background-color: var(--accent-color-1);
+}
+
+.voteButtonSongA:hover {
+    background-color: var(--gold-accent);
+}

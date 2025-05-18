@@ -1,0 +1,145 @@
+.scoreboard {
+    background-color: var(--secondary-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    margin-top: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.scoreboard h2 {
+    color: var(--gold-accent);
+    text-align: center;
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--gold-accent);
+    padding-bottom: 10px;
+}
+
+.scoreboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.scoreboard th,
+.scoreboard td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--card-bg);
+    vertical-align: middle;
+}
+
+.scoreboard th {
+    background-color: var(--card-bg);
+    color: var(--accent-color-2);
+    font-size: 1.1em;
+}
+
+.scoreboard td {
+    color: var(--text-color);
+}
+
+.scoreboard tr:nth-child(even) td {
+    background-color: #2a3a4a;
+}
+
+.scoreboard tr:last-child td {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: bold;
+    color: var(--gold-accent);
+    font-size: 1.2em;
+}
+
+.countryDetails {
+    display: flex;
+    align-items: center;
+}
+
+.flag {
+    font-size: 1.5em;
+    margin-right: 10px;
+    line-height: 1;
+}
+
+.countryName {
+    font-size: 1em;
+}
+
+.toggleScoreboardButton {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--primary-bg);
+    background-color: var(--gold-accent);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.toggleScoreboardButton:hover {
+    background-color: var(--accent-color-2);
+    transform: scale(1.03);
+}
+
+.infoMessage {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: var(--text-color);
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+}
+
+
+@media (max-width: 768px) {
+    .scoreboard {
+        padding: 15px;
+    }
+
+    .scoreboard th,
+    .scoreboard td {
+        padding: 10px 8px;
+        font-size: 0.9em;
+    }
+
+    .flag {
+        font-size: 1.3em;
+        margin-right: 6px;
+    }
+
+    .countryName {
+        font-size: 0.9em;
+    }
+
+    .rank {
+        font-size: 1.1em;
+    }
+
+    .toggleScoreboardButton {
+        width: 100%;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .scoreboard th,
+    .scoreboard td {
+        font-size: 0.8em;
+        padding: 8px 5px;
+    }
+
+    .flag {
+        font-size: 1.1em;
+    }
+}

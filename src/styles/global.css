@@ -1,0 +1,75 @@
+:root {
+    --primary-bg: #1a1a2e;
+    --secondary-bg: #16213e;
+    --card-bg: #2c3e50;
+    --text-color: #e0e0e0;
+    --header-text-color: #ffffff;
+    --accent-color-1: #e94560;
+    --accent-color-2: #00f5d4;
+    --gold-accent: #f9d71c;
+    --border-radius: 8px;
+    --font-main: 'Arial', sans-serif;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#app {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+header.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(45deg, var(--accent-color-1), var(--accent-color-2));
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+header.app-header h1 {
+    color: var(--header-text-color);
+    font-size: 2.5em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header.app-header p {
+    color: var(--primary-bg);
+    font-size: 1.1em;
+}
+
+.loading-message,
+.error-message {
+    text-align: center;
+    font-size: 1.2em;
+    padding: 20px;
+    color: var(--gold-accent);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    header.app-header h1 {
+        font-size: 2em;
+    }
+}

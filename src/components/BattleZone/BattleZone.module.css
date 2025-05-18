@@ -1,0 +1,34 @@
+/* src/components/BattleZone/BattleZone.module.css */
+.battleZone {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    margin-bottom: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.songContainer {
+    flex: 1 1 45%;
+    min-width: 300px;
+    max-width: 500px;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .battleZone {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .songContainer {
+        width: 90%;
+        max-width: 400px;
+        flex-basis: auto;
+        margin-bottom: 20px;
+    }
+
+    .songContainer:last-child {
+        margin-bottom: 0;
+    }
+}
