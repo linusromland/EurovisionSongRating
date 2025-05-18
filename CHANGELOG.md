@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] - 2025-05-18
+
+### Fixed
+
+- Updated share link generation to limit elo to 2 decimal places.
+
 ## [1.1.0] - 2025-05-18
 
 ### Added
