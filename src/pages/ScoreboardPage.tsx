@@ -2,7 +2,7 @@ import { decompressFromEncodedURIComponent } from 'lz-string';
 
 import { Fragment } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import type { EloRatings, Song } from '../types';
+import type { EloRatings, Song, UrlData } from '../types';
 import { initialSongsData } from '../data/songData';
 import { Scoreboard } from '../components/Scoreboard/Scoreboard';
 
@@ -19,30 +19,30 @@ export function ScoreboardPage() {
             try {
                 const decodedData = atob(dataParam);
                 const decompressedData = decompressFromEncodedURIComponent(decodedData);
-                const parsedData = JSON.parse(decompressedData);
+                const minifiedParsedData: UrlData = JSON.parse(decompressedData);
 
                 const deMinifiedRatings: { [key: string]: { elo: number; numberOfVotes: number } } = {};
-                Object.entries(parsedData.ratings).forEach(([key, value]) => {
-                    if (typeof value === 'object' && value !== null && 'elo' in value) {
+
+                Object.entries(minifiedParsedData.ratings).forEach(([key, value]) => {
+                    if (typeof value === 'string' && value !== null) {
                         let elo: number;
 
-                        if (typeof value.elo === 'string') {
-                            elo = parseFloat(value.elo as string);
-                        } else if (typeof value.elo === 'number') {
-                            elo = value.elo;
+                        if (typeof value === 'string') {
+                            elo = parseFloat(value as string);
+                        } else if (typeof value === 'number') {
+                            elo = value;
                         } else {
                             return;
                         }
 
-                        console.log(key);
-
                         deMinifiedRatings[key] = { elo, numberOfVotes: 0 };
                     }
                 });
-                parsedData.ratings = deMinifiedRatings;
 
-                setName(parsedData.name);
-                setEloRatings(parsedData.ratings);
+                const ratings: EloRatings = deMinifiedRatings as EloRatings;
+
+                setName(minifiedParsedData.name);
+                setEloRatings(ratings);
             } catch (error) {
                 console.error('Error parsing data from URL:', error);
             }

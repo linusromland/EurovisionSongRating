@@ -16,11 +16,7 @@ const generateShareLink = (name: string, ratings: EloRatings): string => {
 
     const sanitizedRatings: UrlData['ratings'] = {};
     Object.entries(ratings).map(([key, value]) => {
-        const newPayload = {
-            elo: value.elo.toFixed(0),
-        }
-
-        sanitizedRatings[key] = newPayload;
+        sanitizedRatings[key] = value.elo.toFixed(0);
     });
 
     const payload: UrlData = {

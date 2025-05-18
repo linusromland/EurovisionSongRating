@@ -19,8 +19,6 @@ export interface EloRatings {
 export type UrlData = {
     name: string;
     ratings: {
-        [key: string]: {
-            elo: string;
-        };
+         [key:string]: string
     };
 };
