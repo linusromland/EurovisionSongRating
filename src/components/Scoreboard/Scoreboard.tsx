@@ -43,16 +43,26 @@ export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatin
     if (songs.length === 0 && Object.keys(eloRatings).length === 0) {
         return <div class={styles.infoMessage}>The scoreboard is empty. Start voting!</div>;
     }
-     if (songsToDisplay.length === 0) {
+    if (songsToDisplay.length === 0) {
         return <div class={styles.infoMessage}>No songs to display in scoreboard yet.</div>;
     }
 
+    const percentageRated = useMemo(() => {
+        const totalSongs = songs.length;
+        const ratedSongs = sortedSongsFull.length;
+        return Math.round((ratedSongs / totalSongs) * 100);
+    }, [sortedSongsFull, songs]);
 
     return (
         <section class={styles.scoreboard}>
             <div class={styles.scoreboardHeader}>
-                <h2>{title}</h2>
-            <div class={styles.headerButtons}>
+                <div class={styles.headerTitle}>
+                    <h2>{title}</h2>
+                    <p class={styles.headerSubtitle}>
+                        {percentageRated} % of songs rated
+                    </p>
+                </div>
+                <div class={styles.headerButtons}>
 
                     {linkToOwnBoard && (
                         <button class={styles.button} onClick={() => window.location.href = '/'}>
@@ -60,19 +70,19 @@ export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatin
                         </button>
                     )}
 
-            {shareScoreboard && (
-                <button class={styles.button} onClick={shareScoreboard}>
-                    Share Scoreboard
-                </button>
-            )}
-            {clearScoreboard && (
-                <button class={styles.button} onClick={clearScoreboard}>
-                    Reset Scoreboard
-                </button>
-            )}
+                    {shareScoreboard && (
+                        <button class={styles.button} onClick={shareScoreboard}>
+                            Share Scoreboard
+                        </button>
+                    )}
+                    {clearScoreboard && (
+                        <button class={styles.button} onClick={clearScoreboard}>
+                            Reset Scoreboard
+                        </button>
+                    )}
+                </div>
             </div>
-            </div>
-    
+
             <table>
                 <thead>
                     <tr>

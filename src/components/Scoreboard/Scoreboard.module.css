@@ -113,6 +113,17 @@
     transform: scale(1.03);
 }
 
+.headerTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+}
+
+.headerSubtitle {
+    font-size: 0.9em;
+    color: var(--text-color);
+    margin-top: 5px;
+}
 .infoMessage {
     text-align: center;
     padding: 20px;
