@@ -59,7 +59,7 @@ export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatin
                 <div class={styles.headerTitle}>
                     <h2>{title}</h2>
                     <p class={styles.headerSubtitle}>
-                        {songs.length} of {sortedSongsFull.length} songs rated ({percentageRated}%)
+                        {sortedSongsFull.length} of {songs.length} songs rated ({percentageRated}%)
                     </p>
                 </div>
                 <div class={styles.headerButtons}>
