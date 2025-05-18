@@ -60,7 +60,6 @@
 
 .title {
     font-size: 1.5em;
-    /* Adjusted title size */
     color: var(--gold-accent, #f9d71c);
     margin: 0;
     font-weight: 600;
@@ -89,7 +88,6 @@
     flex-grow: 1;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
     .dialog {
         max-width: 95%;

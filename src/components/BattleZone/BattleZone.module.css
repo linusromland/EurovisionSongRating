@@ -1,4 +1,3 @@
-/* src/components/BattleZone/BattleZone.module.css */
 .battleZone {
     display: flex;
     justify-content: space-around;
@@ -11,7 +10,7 @@
 .songContainer {
     flex: 1 1 45%;
     min-width: 300px;
-    max-width: 500px;
+    max-width: 90%;
     display: flex;
 }
 
@@ -23,7 +22,7 @@
 
     .songContainer {
         width: 90%;
-        max-width: 400px;
+        max-width: 100%;
         flex-basis: auto;
         margin-bottom: 20px;
     }

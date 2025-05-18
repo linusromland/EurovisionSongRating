@@ -30,7 +30,7 @@ export function Scoreboard({ songs, eloRatings,clearScoreboard,shareScoreboard }
         setShowAll(prev => !prev);
     }, []);
 
-    if (songs.length === 0 && Object.keys(eloRatings).length === 0) { // Check if there are any songs processed
+    if (songs.length === 0 && Object.keys(eloRatings).length === 0) {
         return <div class={styles.infoMessage}>Your scoreboard is empty. Start voting!</div>;
     }
      if (songsToDisplay.length === 0) {
