@@ -24,7 +24,10 @@ export function HomePage() {
         const loadedRatings = loadedRatingsRaw ? JSON.parse(loadedRatingsRaw) : {};
         const initialRatings: EloRatings = {};
         initialSongsData.forEach(song => {
-            initialRatings[song.id] = loadedRatings[song.id] || INITIAL_ELO;
+            initialRatings[song.id] = loadedRatings[song.id] || {
+                elo: INITIAL_ELO,
+                numberOfVotes: 0,
+            };
         });
         setEloRatings(initialRatings);
         setIsLoading(false);
@@ -35,18 +38,25 @@ export function HomePage() {
             setCurrentPair([null, null]);
             return;
         }
+
+        const filteredSongs = allSongs.sort((a, b) => {
+            const aVotes = eloRatings[a.id]?.numberOfVotes || 0;
+            const bVotes = eloRatings[b.id]?.numberOfVotes || 0;
+            return bVotes - aVotes;
+        }).slice(Math.floor(allSongs.length / 2));
+
         let songAIndex = -1, songBIndex = -1;
         let attempts = 0;
-        const maxAttempts = allSongs.length * (allSongs.length - 1);
+        const maxAttempts = filteredSongs.length * (filteredSongs.length - 1);
         const [prevSongA, prevSongB] = currentPair;
 
         do {
-            songAIndex = Math.floor(Math.random() * allSongs.length);
-            songBIndex = Math.floor(Math.random() * allSongs.length);
+            songAIndex = Math.floor(Math.random() * filteredSongs.length);
+            songBIndex = Math.floor(Math.random() * filteredSongs.length);
             attempts++;
-            if (allSongs.length > 2 && prevSongA && prevSongB && attempts < maxAttempts / 2) {
-                const currentSelectionIdA = allSongs[songAIndex].id;
-                const currentSelectionIdB = allSongs[songBIndex].id;
+            if (filteredSongs.length > 2 && prevSongA && prevSongB && attempts < maxAttempts / 2) {
+                const currentSelectionIdA = filteredSongs[songAIndex].id;
+                const currentSelectionIdB = filteredSongs[songBIndex].id;
                 if ((currentSelectionIdA === prevSongA.id && currentSelectionIdB === prevSongB.id) ||
                     (currentSelectionIdA === prevSongB.id && currentSelectionIdB === prevSongA.id)) {
                     continue;
@@ -54,13 +64,13 @@ export function HomePage() {
             }
         } while (songAIndex === songBIndex && attempts < maxAttempts);
 
-        if (songAIndex === songBIndex && allSongs.length > 1) {
-            songBIndex = (songAIndex + 1) % allSongs.length;
-        } else if (songAIndex === songBIndex && allSongs.length === 1) {
-            setCurrentPair([allSongs[0], null]);
+        if (songAIndex === songBIndex && filteredSongs.length > 1) {
+            songBIndex = (songAIndex + 1) % filteredSongs.length;
+        } else if (songAIndex === songBIndex && filteredSongs.length === 1) {
+            setCurrentPair([filteredSongs[0], null]);
             return;
         }
-        setCurrentPair([allSongs[songAIndex], allSongs[songBIndex]]);
+        setCurrentPair([filteredSongs[songAIndex], filteredSongs[songBIndex]]);
     }, [allSongs, currentPair]);
 
     useEffect(() => {
@@ -77,12 +87,12 @@ export function HomePage() {
 
     const handleVote = useCallback((winnerId: string, loserId: string) => {
         setEloRatings(prevRatings => {
-            const winnerRating = prevRatings[winnerId] || INITIAL_ELO;
-            const loserRating = prevRatings[loserId] || INITIAL_ELO;
+            const winnerRating = prevRatings[winnerId]?.elo || INITIAL_ELO;
+            const loserRating = prevRatings[loserId]?.elo || INITIAL_ELO;
             const expectedWinner = calculateExpectedScore(winnerRating, loserRating);
             const newWinnerRating = winnerRating + K_FACTOR * (1 - expectedWinner);
             const newLoserRating = loserRating + K_FACTOR * (0 - (1 - expectedWinner));
-            return { ...prevRatings, [winnerId]: newWinnerRating, [loserId]: newLoserRating };
+            return { ...prevRatings, [winnerId]: { elo: newWinnerRating, numberOfVotes: (prevRatings[winnerId]?.numberOfVotes || 0) + 1 }, [loserId]: { elo: newLoserRating, numberOfVotes: (prevRatings[loserId]?.numberOfVotes || 0) + 1 } };
         });
         setCurrentPair([null, null]);
     }, [setCurrentPair]);
@@ -98,7 +108,10 @@ export function HomePage() {
 
         const resetRatings: EloRatings = {};
         allSongs.forEach(song => {
-            resetRatings[song.id] = INITIAL_ELO;
+            resetRatings[song.id] = {
+                elo: INITIAL_ELO,
+                numberOfVotes: 0,
+            };
         });
         setEloRatings(resetRatings);
         localStorage.removeItem('eurovisionEloRatings');

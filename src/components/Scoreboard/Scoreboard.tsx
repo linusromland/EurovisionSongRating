@@ -18,12 +18,12 @@ export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatin
     const sortedSongsFull = useMemo(() => {
 
         return Object.entries(eloRatings)
-            .map(([songId, elo]) => {
+            .map(([songId, { elo }]) => {
                 const song = songs.find(s => s.id === songId);
                 if (!song || elo === INITIAL_ELO) return null;
                 return {
                     ...song,
-                    elo: elo
+                    elo: elo,
                 };
             }
             ).filter(Boolean).sort((a, b) => (b?.elo ?? INITIAL_ELO) - (a?.elo ?? INITIAL_ELO)) as Song[]

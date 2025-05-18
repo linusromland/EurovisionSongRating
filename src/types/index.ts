@@ -6,8 +6,12 @@ export interface Song {
     song: string;
     youtubeUrl: string;
     elo?: number;
+    numberOfVotes?: number;
 }
 
 export interface EloRatings {
-    [songId: string]: number;
+    [songId: string]: {
+        elo: number;
+        numberOfVotes: number;
+    };
 }
