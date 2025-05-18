@@ -21,7 +21,7 @@ export function ScoreboardPage() {
                 const decompressedData = decompressFromEncodedURIComponent(decodedData);
                 const minifiedParsedData: UrlData = JSON.parse(decompressedData);
 
-                const deMinifiedRatings: { [key: string]: { elo: number; numberOfVotes: number } } = {};
+                const deMinifiedRatings: EloRatings = {};
 
                 Object.entries(minifiedParsedData.ratings).forEach(([key, value]) => {
                     if (typeof value === 'string' && value !== null) {
