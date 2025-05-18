@@ -15,3 +15,10 @@ export interface EloRatings {
         numberOfVotes: number;
     };
 }
+
+export type UrlData = {
+    name: string;
+    ratings: {
+         [key:string]: string
+    };
+};

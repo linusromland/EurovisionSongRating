@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.2] - 2025-05-18
+
+### Fixed
+
+- Significantly reduced URL length
+
 ## [1.1.1] - 2025-05-18
 
 ### Fixed
