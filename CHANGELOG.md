@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0] - 2025-05-18
+
+### Added
+
+- Added link to the YouTube video in the scoreboard for each song.
+- Displayed the number of songs voted for, in addition to the percentage.
+
+
 ## [1.0.0] - 2025-05-18
 
 ### Added

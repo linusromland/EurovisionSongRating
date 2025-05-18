@@ -61,6 +61,7 @@
 }
 
 .scoreboard td {
+    cursor: pointer;
     color: var(--text-color);
 }
 
@@ -68,6 +69,13 @@
     background-color: #2a3a4a;
 }
 
+.scoreboard tr:nth-child(even):hover td {
+    background-color: var(--card-bg);
+}
+
+.scoreboard tr:nth-child(odd):hover td {
+    background-color: #283047;
+}
 .scoreboard tr:last-child td {
     border-bottom: none;
 }

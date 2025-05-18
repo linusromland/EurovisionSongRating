@@ -59,7 +59,7 @@ export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatin
                 <div class={styles.headerTitle}>
                     <h2>{title}</h2>
                     <p class={styles.headerSubtitle}>
-                        {percentageRated} % of songs rated
+                        {songs.length} of {sortedSongsFull.length} songs rated ({percentageRated}%)
                     </p>
                 </div>
                 <div class={styles.headerButtons}>
@@ -95,7 +95,7 @@ export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatin
                 </thead>
                 <tbody>
                     {songsToDisplay.map((song, index) => (
-                        <tr key={song.id}>
+                        <tr key={song.id} onClick={() => window.open(song.youtubeUrl, '_blank')}>
                             <td><span class={styles.rank}>{index + 1}</span></td>
                             <td>
                                 <div class={styles.countryDetails}>
