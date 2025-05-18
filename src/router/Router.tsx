@@ -1,9 +1,11 @@
 import type {  ComponentChildren } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import { HomePage } from '../pages/HomePage'; 
+import { ScoreboardPage } from '../pages/ScoreboardPage';
 
 const routes: Record<string, () => ComponentChildren> = {
-    '/': () => <HomePage />
+    '/': () => <HomePage />,
+    '/scoreboard': () => <ScoreboardPage />,
 };
 
 export function Router() {
@@ -21,7 +23,7 @@ export function Router() {
         };
     }, []);
 
-    const PageComponent = routes[currentPath] || routes['/']; 
+    const PageComponent = routes[currentPath]; 
 
     if (!PageComponent) {
         return (

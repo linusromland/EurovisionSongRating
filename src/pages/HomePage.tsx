@@ -6,6 +6,7 @@ import { calculateExpectedScore } from '../utils/elo';
 import { BattleZone } from '../components/BattleZone/BattleZone';
 import { Scoreboard } from '../components/Scoreboard/Scoreboard';
 import { ConfirmAction } from '../components/ConfirmAction/ConfirmAction';
+import { ShareScoreboardDialog } from '../components/ShareScoreboardDialog/ShareScoreboardDialog';
 import confirmActionStyles from '../components/ConfirmAction/ConfirmAction.module.css';
 
 export function HomePage() {
@@ -15,6 +16,7 @@ export function HomePage() {
     const [allSongs, setAllSongs] = useState<Song[]>([]);
     const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
     const [isResetting, setIsResetting] = useState(false);
+    const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
     useEffect(() => {
         setAllSongs(initialSongsData);
@@ -88,6 +90,9 @@ export function HomePage() {
     const openResetDialog = () => setIsResetConfirmOpen(true);
     const handleCancelReset = () => setIsResetConfirmOpen(false);
 
+    const openShareDialog = () => setIsShareDialogOpen(true);
+    const closeShareDialog = () => setIsShareDialogOpen(false);
+
     const handleConfirmReset = useCallback(async () => {
         setIsResetting(true);
 
@@ -124,7 +129,7 @@ export function HomePage() {
                 allSongs.length >= 2 && <div class="loading-message">Selecting next pair...</div>
             )}
 
-            <Scoreboard songs={allSongs} eloRatings={eloRatings} clearScoreboard={openResetDialog} />
+            <Scoreboard songs={allSongs} eloRatings={eloRatings} shareScoreboard={openShareDialog} clearScoreboard={openResetDialog} />
 
             <ConfirmAction
                 isOpen={isResetConfirmOpen}
@@ -136,6 +141,12 @@ export function HomePage() {
                 cancelText="No, Keep"
                 confirmButtonClass={confirmActionStyles.confirmButtonDestructive}
                 isConfirming={isResetting}
+            />
+
+            <ShareScoreboardDialog
+                isOpen={isShareDialogOpen}
+                onClose={closeShareDialog}
+                eloRatings={eloRatings}
             />
         </Fragment>
     );

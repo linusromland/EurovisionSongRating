@@ -1,0 +1,149 @@
+.shareContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.instructions {
+    font-size: 1em;
+    color: var(--text-color, #e0e0e0);
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-size: 0.9em;
+    color: var(--gold-accent, #f9d71c);
+    font-weight: bold;
+}
+
+.inputField {
+    padding: 10px 12px;
+    font-size: 1em;
+    border-radius: var(--border-radius, 8px);
+    border: 1px solid var(--card-bg, #2c3e50);
+    background-color: var(--primary-bg, #1a1a2e);
+    color: var(--text-color, #e0e0e0);
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: var(--accent-color-2, #00f5d4);
+    box-shadow: 0 0 0 2px rgba(0, 245, 212, 0.3);
+}
+
+.inputField:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.linkDisplayGroup {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.linkField {
+    flex-grow: 1;
+    background-color: var(--primary-bg, #1a1a2e);
+    border: 1px dashed var(--card-bg, #2c3e50);
+    cursor: default;
+}
+.linkField:focus {
+    border-color: var(--card-bg, #2c3e50);
+    box-shadow: none;
+}
+
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 0.95em;
+    font-weight: bold;
+    border-radius: var(--border-radius, 8px);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.button:active:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.primaryButton {
+    background-color: var(--accent-color-2, #00f5d4);
+    color: var(--primary-bg, #1a1a2e);
+}
+.primaryButton:hover:not(:disabled) {
+    background-color: #00d8bc;
+}
+
+.copyButton {
+    background-color: var(--accent-color-1, #e94560);
+    color: var(--header-text-color, #ffffff);
+    white-space: nowrap;
+}
+.copyButton:hover:not(:disabled) {
+    background-color: #c7304a;
+}
+.copyButton.copied {
+    background-color: var(--gold-accent, #f9d71c);
+    color: var(--primary-bg, #1a1a2e);
+}
+.copyButton.copied:hover:not(:disabled) {
+    background-color: #e0c41a;
+}
+
+
+.cancelButton {
+    background-color: var(--card-bg, #2c3e50);
+    color: var(--text-color, #e0e0e0);
+}
+.cancelButton:hover:not(:disabled) {
+    background-color: #3e566f;
+}
+
+@media (max-width: 480px) {
+    .actions {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+    .button {
+        width: 100%;
+        padding: 12px;
+    }
+    .linkDisplayGroup {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .linkField {
+        margin-bottom: 10px;
+    }
+}

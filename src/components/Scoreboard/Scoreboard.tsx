@@ -4,13 +4,15 @@ import styles from './Scoreboard.module.css';
 import { INITIAL_ELO, SCOREBOARD_INITIAL_LIMIT } from '../../data/songData';
 
 interface ScoreboardProps {
+    title?: string
     songs: Song[];
     eloRatings: EloRatings;
+    linkToOwnBoard?: boolean
     shareScoreboard?: () => void;
     clearScoreboard?: () => void;
 }
 
-export function Scoreboard({ songs, eloRatings,clearScoreboard,shareScoreboard }: ScoreboardProps) {
+export function Scoreboard({ title = "Your Personal Scoreboard", songs, eloRatings, linkToOwnBoard, clearScoreboard, shareScoreboard }: ScoreboardProps) {
     const [showAll, setShowAll] = useState(false);
 
     const sortedSongsFull = useMemo(() => {
@@ -31,7 +33,7 @@ export function Scoreboard({ songs, eloRatings,clearScoreboard,shareScoreboard }
     }, []);
 
     if (songs.length === 0 && Object.keys(eloRatings).length === 0) {
-        return <div class={styles.infoMessage}>Your scoreboard is empty. Start voting!</div>;
+        return <div class={styles.infoMessage}>The scoreboard is empty. Start voting!</div>;
     }
      if (songsToDisplay.length === 0) {
         return <div class={styles.infoMessage}>No songs to display in scoreboard yet.</div>;
@@ -41,8 +43,15 @@ export function Scoreboard({ songs, eloRatings,clearScoreboard,shareScoreboard }
     return (
         <section class={styles.scoreboard}>
             <div class={styles.scoreboardHeader}>
-            <h2>Your Personal Scoreboard</h2>
+                <h2>{title}</h2>
             <div class={styles.headerButtons}>
+
+                    {linkToOwnBoard && (
+                        <button class={styles.button} onClick={() => window.location.href = '/'}>
+                            Your Scoreboard
+                        </button>
+                    )}
+
             {shareScoreboard && (
                 <button class={styles.button} onClick={shareScoreboard}>
                     Share Scoreboard
