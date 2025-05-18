@@ -1,6 +1,6 @@
-import type {  ComponentChildren } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import { HomePage } from '../pages/HomePage'; 
+import { HomePage } from '../pages/HomePage';
 import { ScoreboardPage } from '../pages/ScoreboardPage';
 
 const routes: Record<string, () => ComponentChildren> = {
@@ -23,14 +23,14 @@ export function Router() {
         };
     }, []);
 
-    const PageComponent = routes[currentPath]; 
+    const PageComponent = routes[currentPath];
 
     if (!PageComponent) {
         return (
             <div class="container" style={{ textAlign: 'center', paddingTop: '50px' }}>
                 <header class="app-header"><h1>404 - Page Not Found</h1></header>
                 <p>Sorry, the page you are looking for does not exist.</p>
-                <a href="/" style={{color: 'var(--accent-color-2)'}}>Go to Homepage</a>
+                <a href="/" style={{ color: 'var(--accent-color-2)' }}>Go to Homepage</a>
             </div>
         );
     }

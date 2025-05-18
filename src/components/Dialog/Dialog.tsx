@@ -8,8 +8,8 @@ interface DialogProps {
     title?: string;
     children: ComponentChildren;
     showCloseButton?: boolean;
-    ariaLabelledBy?: string; 
-    ariaDescribedBy?: string; 
+    ariaLabelledBy?: string;
+    ariaDescribedBy?: string;
 }
 
 export function Dialog({

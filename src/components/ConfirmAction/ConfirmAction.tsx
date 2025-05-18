@@ -1,4 +1,4 @@
-import { Dialog } from '../Dialog/Dialog'; 
+import { Dialog } from '../Dialog/Dialog';
 import styles from './ConfirmAction.module.css';
 
 interface ConfirmActionProps {
