@@ -1,3 +1,5 @@
+import { decompressFromEncodedURIComponent } from 'lz-string';
+
 import { Fragment } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import type { EloRatings, Song } from '../types';
@@ -16,7 +18,29 @@ export function ScoreboardPage() {
         if (dataParam) {
             try {
                 const decodedData = atob(dataParam);
-                const parsedData = JSON.parse(decodedData);
+                const decompressedData = decompressFromEncodedURIComponent(decodedData);
+                const parsedData = JSON.parse(decompressedData);
+
+                const deMinifiedRatings: { [key: string]: { elo: number; numberOfVotes: number } } = {};
+                Object.entries(parsedData.ratings).forEach(([key, value]) => {
+                    if (typeof value === 'object' && value !== null && 'elo' in value) {
+                        let elo: number;
+
+                        if (typeof value.elo === 'string') {
+                            elo = parseFloat(value.elo as string);
+                        } else if (typeof value.elo === 'number') {
+                            elo = value.elo;
+                        } else {
+                            return;
+                        }
+
+                        console.log(key);
+
+                        deMinifiedRatings[key] = { elo, numberOfVotes: 0 };
+                    }
+                });
+                parsedData.ratings = deMinifiedRatings;
+
                 setName(parsedData.name);
                 setEloRatings(parsedData.ratings);
             } catch (error) {

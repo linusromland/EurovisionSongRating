@@ -1,6 +1,8 @@
+import { compressToEncodedURIComponent } from 'lz-string';
+
 import { useState, useCallback } from 'preact/hooks';
 import { Dialog } from '../Dialog/Dialog';
-import type { EloRatings } from '../../types';
+import type { EloRatings, UrlData } from '../../types';
 import styles from './ShareScoreboardDialog.module.css';
 
 interface ShareScoreboardDialogProps {
@@ -12,17 +14,23 @@ interface ShareScoreboardDialogProps {
 const generateShareLink = (name: string, ratings: EloRatings): string => {
     const sanitizedName = name.replace(/[^a-zA-Z0-9 ]/g, '');
 
-    const sanitizedRatings: EloRatings = {}
+    const sanitizedRatings: UrlData['ratings'] = {};
     Object.entries(ratings).map(([key, value]) => {
         const newPayload = {
-            numberOfVotes: value.numberOfVotes || 0,
-            elo: Math.round((value.elo || 0) * 100) / 100,
+            elo: value.elo.toFixed(0),
         }
 
         sanitizedRatings[key] = newPayload;
     });
 
-    const base64Payload = btoa(JSON.stringify({ name: sanitizedName, ratings: sanitizedRatings }));
+    const payload: UrlData = {
+        name: sanitizedName,
+        ratings: sanitizedRatings,
+    };
+
+    const compressedPayload = compressToEncodedURIComponent(JSON.stringify(payload));
+
+    const base64Payload = btoa(compressedPayload);
 
     const baseUrl = window.location.origin;
 
