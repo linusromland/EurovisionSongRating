@@ -98,6 +98,13 @@ export function App() {
         selectNewPair();
     }, [selectNewPair]);
 
+    const handleClear = useCallback(() => {
+        setEloRatings({});
+        setCurrentPair([null, null]);
+        setAllSongs(initialSongsData);
+        localStorage.removeItem('eurovisionEloRatings');
+    }, []);
+
     if (isLoading) {
         return <div class="loading-message">Initializing Eurovision Scoreboard...</div>;
     }
@@ -136,6 +143,7 @@ export function App() {
                 <Scoreboard
                     songs={allSongs}
                     eloRatings={eloRatings}
+                    clearScoreboard={handleClear}
                 />
             </div>
         </Fragment>

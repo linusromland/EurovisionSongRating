@@ -6,9 +6,11 @@ import { INITIAL_ELO, SCOREBOARD_INITIAL_LIMIT } from '../../data/songData';
 interface ScoreboardProps {
     songs: Song[];
     eloRatings: EloRatings;
+    shareScoreboard?: () => void;
+    clearScoreboard?: () => void;
 }
 
-export function Scoreboard({ songs, eloRatings }: ScoreboardProps) {
+export function Scoreboard({ songs, eloRatings,clearScoreboard,shareScoreboard }: ScoreboardProps) {
     const [showAll, setShowAll] = useState(false);
 
     const sortedSongsFull = useMemo(() => {
@@ -38,7 +40,22 @@ export function Scoreboard({ songs, eloRatings }: ScoreboardProps) {
 
     return (
         <section class={styles.scoreboard}>
+            <div class={styles.scoreboardHeader}>
             <h2>Your Personal Scoreboard</h2>
+            <div class={styles.headerButtons}>
+            {shareScoreboard && (
+                <button class={styles.button} onClick={shareScoreboard}>
+                    Share Scoreboard
+                </button>
+            )}
+            {clearScoreboard && (
+                <button class={styles.button} onClick={clearScoreboard}>
+                    Reset Scoreboard
+                </button>
+            )}
+            </div>
+            </div>
+    
             <table>
                 <thead>
                     <tr>
